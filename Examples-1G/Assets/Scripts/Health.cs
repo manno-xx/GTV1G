@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// A basic health system
+/// A basic health system (we'll expand on this soon)
 /// Should be possible to apply to anything that is damageable
 /// </summary>
 public class Health : MonoBehaviour
@@ -15,7 +15,8 @@ public class Health : MonoBehaviour
     }
 
     /// <summary>
-    /// Just for testing: WHen you click the mouse, do damage
+    /// Just for testing: When you click the mouse, do damage
+    /// This will be removed later...
     /// </summary>
     private void OnMouseDown()
     {
@@ -23,7 +24,8 @@ public class Health : MonoBehaviour
     }
 
     /// <summary>
-    /// does damage to this health system
+    /// Does damage to this health system
+    /// Todo: check for 'death' and notify possible interested parts of the game of the update
     /// </summary>
     /// <param name="damage">The amount of damage to do</param>
     public void DoDamage(int damage)
