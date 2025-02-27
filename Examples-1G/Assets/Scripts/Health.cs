@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// A basic health system (we'll expand on this soon)
@@ -6,8 +7,10 @@ using UnityEngine;
 /// </summary>
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float health;
+    [SerializeField] private float maxHealth = 100;
+
+    public UnityEvent<float> healthUpdate;
     
     void Start()
     {
@@ -20,9 +23,18 @@ public class Health : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        health -= 10;
+        DoDamage(10);
     }
 
+    public void Heal(int amount)
+    {
+        health += amount;
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+    
     /// <summary>
     /// Does damage to this health system
     /// Todo: check for 'death' and notify possible interested parts of the game of the update
@@ -31,5 +43,11 @@ public class Health : MonoBehaviour
     public void DoDamage(int damage)
     {
         health -= damage;
+        if (health < 0)
+        {
+            health = 0;
+        }
+        // whenever health changes, update/tell anyone interested
+        healthUpdate.Invoke(health/maxHealth);
     }
 }
