@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
@@ -19,6 +18,9 @@ public class InventoryItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inventory.AddToInventory(itemType, itemCount);
+            
+            SendMessage("TriggerSound", SendMessageOptions.DontRequireReceiver);
+            
             Destroy(gameObject);
         }
     }
